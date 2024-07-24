@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Security.Cryptography;
 using Unity.Collections;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ public class GridManager : MonoBehaviour
     [SerializeField] int columns;
     [SerializeField] float cellSize;
 
+    Color hoverColor = Color.gray;
+    Color controlledColor = Color.red;
+
     [SerializeField] GameObject cellPrefab;
     GameObject[,] gridArray;
 
@@ -17,12 +22,6 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         CreateGrid();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void CreateGrid() {
@@ -47,6 +46,9 @@ public class GridManager : MonoBehaviour
         cell.name = $"Cell {x},{y}";
         cell.transform.parent = transform;
         cell.transform.localScale = new Vector3(cellSize, cellSize, 1);
+
+        CellController cellControl = cell.GetComponent<CellController>();
+        cellControl.Initialize(x,y,controlledColor,hoverColor,"test");
 
         return cell;
     }
