@@ -9,19 +9,42 @@ public class CellController : MonoBehaviour
     public int y;
 
     public Color controlledColor;
-    public Color hoverColor;
 
     public string currController;
-    public string cellType;
+    public int cellType;
 
-    //[SerializeField] SpriteRenderer cellRenderer;
+    [SerializeField] SpriteRenderer cellRenderer;
+
+    void Start() {
+        switch (cellType) {
+            case 0:
+                cellRenderer.color = new Color(0f, 100f / 255f, 0f);
+                break;
+            case 1:
+                cellRenderer.color = Color.blue;
+                break;
+            case 2:
+                cellRenderer.color = Color.grey;
+                break;
+        }
+    }
 
     void OnMouseEnter() {
-        //cellRenderer.material.color = hoverColor;
+        cellRenderer.color = Color.white;
     }
 
     void OnMouseExit() {
-        //.material.color = controlledColor;
+        switch (cellType) {
+            case 0:
+                cellRenderer.color = new Color(0f, 100f / 255f, 0f);
+                break;
+            case 1:
+                cellRenderer.color = Color.blue;
+                break;
+            case 2:
+                cellRenderer.color = Color.grey;
+                break;
+        }
     }
 
     void OnMouseDown() {
@@ -29,10 +52,9 @@ public class CellController : MonoBehaviour
         // do more
     }
 
-    public void Initialize(int x, int y, Color controlledColor, Color hoverColor, string currController) {
+    public void Initialize(int x, int y, Color controlledColor, string currController) {
         this.x = x;
         this.y = y;
         this.controlledColor = controlledColor;
-        this.hoverColor = hoverColor;
     }
 }
