@@ -8,12 +8,15 @@ public class CellController : MonoBehaviour
     public int x;
     public int y;
 
-    public Color controlledColor;
+    public Color friendlyColor = Color.blue;
+    public Color enemyColor = Color.red;
 
     public string currController;
     public int cellType;
 
     [SerializeField] SpriteRenderer cellRenderer;
+
+    private CellInfoManager cellInfoManager;
 
     void Start() {
         switch (cellType) {
@@ -27,6 +30,8 @@ public class CellController : MonoBehaviour
                 cellRenderer.color = Color.grey;
                 break;
         }
+
+        cellInfoManager = FindObjectOfType<CellInfoManager>();
     }
 
     void OnMouseEnter() {
@@ -49,12 +54,13 @@ public class CellController : MonoBehaviour
 
     void OnMouseDown() {
         Debug.Log($"Cell {x}, {y} clicked");
-        // do more
+        
+        if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y);
     }
 
     public void Initialize(int x, int y, Color controlledColor, string currController) {
         this.x = x;
         this.y = y;
-        this.controlledColor = controlledColor;
+        this.friendlyColor = controlledColor;
     }
 }
