@@ -31,12 +31,10 @@ public class CellController : MonoBehaviour
                 break;
         }
 
-        cellInfoManager = FindObjectOfType<CellInfoManager>();
+        cellInfoManager = FindFirstObjectByType<CellInfoManager>();
     }
 
-    void OnMouseEnter() {
-        cellRenderer.color = Color.white;
-    }
+    void OnMouseEnter() {cellRenderer.color = Color.white;}
 
     void OnMouseExit() {
         switch (cellType) {

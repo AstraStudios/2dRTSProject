@@ -30,6 +30,9 @@ public class WaveFunctionCollapse
             }
         }
 
+        ReserveStartingArea(0,0);
+        ReserveStartingArea(rows - 20, columns - 12);
+
         // Apply the WFC algorithm to fill the grid
         for (int x = 0; x < rows; x++)
         {
@@ -41,6 +44,14 @@ public class WaveFunctionCollapse
         }
 
         return grid;
+    }
+
+    private void ReserveStartingArea(int startX, int startY) {
+        for (int x = startX; x < startX + 2; x++) {
+            for (int y = startY; y < startY + 3; y++){
+                if (x < rows && y < columns) grid[x,y] = 0;
+            }
+        }
     }
 
     private int DetermineCellValue()

@@ -7,11 +7,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] GameObject movePoint;
 
     float minFOV = 20f;
-    float maxFOV = 153f;
+    float maxFOV = 160f;
     float sensitivity = 10f;
-
-    float gridWidth;
-    float gridHeight;
 
     Vector3 resetCam;
 
