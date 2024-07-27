@@ -11,6 +11,7 @@ public class CellInfoManager : MonoBehaviour
     public GameObject cellInfoPanel;
     [SerializeField] TMP_Text cellTypeText;
     [SerializeField] TMP_Text coordinatesText;
+    [SerializeField] TMP_Text controllerText;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class CellInfoManager : MonoBehaviour
         cellInfoPanel.SetActive(false);
     }
 
-    public void ShowCellInfo(int cellType, int x, int y) {
+    public void ShowCellInfo(int cellType, int x, int y, string controller) {
         cellInfoPanel.SetActive(true);
         switch (cellType) {
             case 0:
@@ -32,6 +33,7 @@ public class CellInfoManager : MonoBehaviour
                 break;
         }
         coordinatesText.text = "Cell: (" + x + ", " + y +")";
+        controllerText.text = "Controlled by: " + controller;
     }
 
     public void HideCellInfo() {cellInfoPanel.SetActive(false);}

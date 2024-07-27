@@ -7,12 +7,12 @@ public class CellController : MonoBehaviour
 
     public int x;
     public int y;
+    public int cellType;
 
     public Color friendlyColor = Color.blue;
     public Color enemyColor = Color.red;
 
-    public string currController;
-    public int cellType;
+    public string controller;
 
     [SerializeField] SpriteRenderer cellRenderer;
 
@@ -53,12 +53,13 @@ public class CellController : MonoBehaviour
     void OnMouseDown() {
         Debug.Log($"Cell {x}, {y} clicked");
         
-        if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y);
+        if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y, controller);
     }
 
-    public void Initialize(int x, int y, Color controlledColor, string currController) {
+    public void Initialize(int x, int y, Color controlledColor, int cellType, string controller) {
         this.x = x;
         this.y = y;
-        this.friendlyColor = controlledColor;
+        this.cellType = cellType;
+        this.controller = controller;
     }
 }

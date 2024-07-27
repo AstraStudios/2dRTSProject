@@ -31,7 +31,7 @@ public class GridManager : MonoBehaviour
         List<int> possibleValues = new List<int> {0,1,2};
 
         WaveFunctionCollapse wfc = new WaveFunctionCollapse(rows, columns, possibleValues);
-        int[,] wfcGrid = wfc.GenerateGrid();
+        int[,] wfcGrid = wfc.GenerateGrid(out List<Vector2Int> friendlyArea, out List<Vector2Int> enemyArea);
 
         int halfRows = rows / 2;
         int halfColumns = columns / 2;
@@ -42,7 +42,13 @@ public class GridManager : MonoBehaviour
             {
                 Vector3 position = new Vector3(x * cellSize, y * cellSize, 0);
                 int cellValue = wfcGrid[x + halfRows, y + halfColumns];
-                GameObject cell = CreateCell(x, y, position, cellValue);
+                string controller = "None";
+
+                Vector2Int cellPos = new Vector2Int(x + halfRows, y + halfColumns);
+                if (friendlyArea.Contains(cellPos)) controller = "Friendly";
+                if (enemyArea.Contains(cellPos)) controller = "Enemy";
+
+                GameObject cell = CreateCell(x, y, position, cellValue, controller);
                 cell.transform.parent = parent.transform;
                 gridArray[x + halfRows, y + halfColumns] = cell; // Adjust for zero-based index
             }
@@ -57,14 +63,14 @@ public class GridManager : MonoBehaviour
         CreateGrid(newGrid);
     }
 
-    GameObject CreateCell(int x, int y, Vector3 position, int cellValue) {
+    GameObject CreateCell(int x, int y, Vector3 position, int cellValue, string controller) {
         GameObject cell = Instantiate(cellPrefab, position, Quaternion.identity);
         cell.name = $"Cell {x},{y}";
         cell.transform.parent = transform;
         cell.transform.localScale = new Vector3(cellSize, cellSize, 1);
 
         CellController cellControl = cell.GetComponent<CellController>();
-        cellControl.Initialize(x,y,controlledColor,"test");
+        cellControl.Initialize(x,y,controlledColor,cellValue, controller);
         cellControl.cellType = cellValue;
 
         return cell;
