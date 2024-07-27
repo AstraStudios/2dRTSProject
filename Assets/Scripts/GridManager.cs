@@ -42,7 +42,7 @@ public class GridManager : MonoBehaviour
             {
                 Vector3 position = new Vector3(x * cellSize, y * cellSize, 0);
                 int cellValue = wfcGrid[x + halfRows, y + halfColumns];
-                string controller = "None";
+                string controller = wfc.GetCellController(x+halfRows, y+halfColumns);
 
                 Vector2Int cellPos = new Vector2Int(x + halfRows, y + halfColumns);
                 if (friendlyArea.Contains(cellPos)) controller = "Friendly";

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class WaveFunctionCollapse
@@ -9,6 +8,7 @@ public class WaveFunctionCollapse
     private int rows;
     private int columns;
     private List<int> possibleValues;
+    private Dictionary<Vector2Int, string> cellControllers;
     int value = 0;
 
     public WaveFunctionCollapse(int rows, int columns, List<int> possibleValues)
@@ -17,6 +17,7 @@ public class WaveFunctionCollapse
         this.columns = columns;
         this.possibleValues = possibleValues;
         grid = new int[rows, columns];
+        cellControllers = new Dictionary<Vector2Int, string>();
     }
 
     public int[,] GenerateGrid(out List<Vector2Int> friendlyArea, out List<Vector2Int> enemyArea)
@@ -35,7 +36,7 @@ public class WaveFunctionCollapse
 
         // Define friendly and enemy starting areas
         DefineStartingArea(friendlyArea, 0, 0, "Friendly"); // Top-left corner
-        DefineStartingArea(enemyArea, rows - 20, columns - 12, "Enemy"); // Bottom-right corner
+        DefineStartingArea(enemyArea, rows - 2, columns - 3, "Enemy"); // Bottom-right corner
 
         // Fill in the rest of the grid with the WFC algorithm
         for (int x = 0; x < rows; x++)
@@ -57,9 +58,17 @@ public class WaveFunctionCollapse
         for (int x = startX; x < startX + 2; x++) {
             for (int y = startY; y < startY + 3; y++){
                 if (x < rows && y < columns) grid[x,y] = 0;
-                area.Add(new Vector2Int(x,y));
+                Vector2Int position = new Vector2Int(x,y);
+                area.Add(position);
+                cellControllers[new Vector2Int(x,y)] = controller;
             }
         }
+    }
+
+    public string GetCellController(int x, int y) {
+        Vector2Int pos = new Vector2Int(x,y);
+        if (cellControllers.ContainsKey(pos)) return cellControllers[pos];
+        return string.Empty;
     }
 
     private int DetermineCellValue()
