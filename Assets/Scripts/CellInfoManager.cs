@@ -31,6 +31,9 @@ public class CellInfoManager : MonoBehaviour
             case 2:
                 cellTypeText.text = "Cell Type: Mountain";
                 break;
+            case 3:
+                cellTypeText.text = "Cell Type: Salvage Spot";
+                break;
         }
         coordinatesText.text = "Cell: (" + x + ", " + y +")";
         controllerText.text = "Controlled by: " + controller;

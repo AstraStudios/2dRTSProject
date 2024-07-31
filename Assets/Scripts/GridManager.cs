@@ -27,8 +27,8 @@ public class GridManager : MonoBehaviour
 
     void CreateGrid(GameObject parent) {
         gridArray = new GameObject[rows, columns];
-
-        List<int> possibleValues = new List<int> {0,1,2};
+        //                                       Grass, Water, Mountain, Coal Depot
+        List<int> possibleValues = new List<int> {0,1,2,3};
 
         WaveFunctionCollapse wfc = new WaveFunctionCollapse(rows, columns, possibleValues);
         int[,] wfcGrid = wfc.GenerateGrid(out List<Vector2Int> friendlyArea, out List<Vector2Int> enemyArea);

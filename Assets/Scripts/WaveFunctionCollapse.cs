@@ -88,6 +88,10 @@ public class WaveFunctionCollapse
                 if (rand < 10) return 2;
                 if (rand > 10) value = Random.Range(0, possibleValues.Count);
                 break;
+            case 3:
+                if (rand < 5) return 3;
+                if (rand > 5) value = Random.Range(0, possibleValues.Count);
+                break;
         }
 
         return possibleValues[0];

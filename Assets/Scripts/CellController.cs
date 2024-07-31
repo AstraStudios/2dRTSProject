@@ -11,6 +11,7 @@ public class CellController : MonoBehaviour
 
     public Color friendlyColor = Color.blue;
     public Color enemyColor = Color.red;
+    private Color cellColor;
 
     public string controller;
 
@@ -19,17 +20,22 @@ public class CellController : MonoBehaviour
     private CellInfoManager cellInfoManager;
 
     void Start() {
+        // gotta figure out to simplify
         switch (cellType) {
             case 0:
-                cellRenderer.color = new Color(0f, 100f / 255f, 0f);
+                cellColor = new Color(0f, 100f / 255f, 0f);
                 break;
             case 1:
-                cellRenderer.color = Color.blue;
+                cellColor = Color.blue;
                 break;
             case 2:
-                cellRenderer.color = Color.grey;
+                cellColor = Color.grey;
+                break;
+            case 3:
+                cellColor = Color.black;
                 break;
         }
+        cellRenderer.color = cellColor;
 
         cellInfoManager = FindFirstObjectByType<CellInfoManager>();
     }
@@ -37,17 +43,7 @@ public class CellController : MonoBehaviour
     void OnMouseEnter() {cellRenderer.color = Color.white;}
 
     void OnMouseExit() {
-        switch (cellType) {
-            case 0:
-                cellRenderer.color = new Color(0f, 100f / 255f, 0f);
-                break;
-            case 1:
-                cellRenderer.color = Color.blue;
-                break;
-            case 2:
-                cellRenderer.color = Color.grey;
-                break;
-        }
+        cellRenderer.color = cellColor;
     }
 
     void OnMouseDown() {
