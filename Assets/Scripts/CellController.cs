@@ -41,6 +41,9 @@ public class CellController : MonoBehaviour
     }
 
     void Update() {
+        if (controller == "Friendly") controlledColor = Color.blue;
+        if (controller == "Enemy") controlledColor = Color.red;
+        if (controller == null) controlledColor = Color.gray;
         CurrColorMode(cellColor, controlledColor);
     }
 
