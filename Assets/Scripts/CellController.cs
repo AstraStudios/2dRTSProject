@@ -8,6 +8,7 @@ public class CellController : MonoBehaviour
     public int x;
     public int y;
     public int cellType;
+    private int colorIndex = 1;
 
     Color controlledColor;
     private Color cellColor;
@@ -39,6 +40,10 @@ public class CellController : MonoBehaviour
         cellInfoManager = FindFirstObjectByType<CellInfoManager>();
     }
 
+    void Update() {
+        CurrColorMode(cellColor, controlledColor);
+    }
+
     void OnMouseEnter() {cellRenderer.color = Color.white;}
 
     void OnMouseExit() {
@@ -51,10 +56,24 @@ public class CellController : MonoBehaviour
         if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y, controller);
     }
 
-    public void Initialize(int x, int y, Color controlledColor, int cellType, string controller) {
+    private void CurrColorMode(Color cellColor, Color currControllerColor) {
+        if (colorIndex == 1) cellRenderer.color = cellColor;
+        if (colorIndex == 2) cellRenderer.color = currControllerColor;
+        if (Input.GetKeyDown(KeyCode.O)) {
+            switch (colorIndex) {
+                case 1:
+                    colorIndex++;
+                    break;
+                case 2:
+                    colorIndex--;
+                    break;
+            }
+        }
+    }
+
+    public void Initialize(int x, int y, int cellType, string controller) {
         this.x = x;
         this.y = y;
-        this.controlledColor = controlledColor;
         this.cellType = cellType;
         this.controller = controller;
     }

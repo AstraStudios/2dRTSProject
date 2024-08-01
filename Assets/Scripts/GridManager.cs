@@ -10,8 +10,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] int columns;
     [SerializeField] float cellSize;
 
-    Color controlledColor = Color.red;
-
     [SerializeField] GameObject cellPrefab;
     GameObject[,] gridArray;
 
@@ -70,7 +68,7 @@ public class GridManager : MonoBehaviour
         cell.transform.localScale = new Vector3(cellSize, cellSize, 1);
 
         CellController cellControl = cell.GetComponent<CellController>();
-        cellControl.Initialize(x,y,controlledColor,cellValue, controller);
+        cellControl.Initialize(x,y,cellValue, controller);
         cellControl.cellType = cellValue;
 
         return cell;

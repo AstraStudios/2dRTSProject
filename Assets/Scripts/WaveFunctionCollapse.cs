@@ -35,8 +35,8 @@ public class WaveFunctionCollapse
         }
 
         // Define friendly and enemy starting areas
-        DefineStartingArea(friendlyArea, 0, 0, "Friendly"); // Top-left corner
-        DefineStartingArea(enemyArea, rows - 2, columns - 3, "Enemy"); // Bottom-right corner
+        for (int i = 0; i < rows/2; i++) for (int o = 0; o < columns/2; o++) DefineStartingArea(friendlyArea, i, o, "Friendly"); 
+        for (int t = rows/2; t < rows; t++) for (int k = columns/2; k < columns; k++) DefineStartingArea(enemyArea, t, k, "Enemy");
 
         // Fill in the rest of the grid with the WFC algorithm
         for (int x = 0; x < rows; x++)
@@ -57,7 +57,6 @@ public class WaveFunctionCollapse
     private void DefineStartingArea(List<Vector2Int> area, int startX, int startY, string controller) {
         for (int x = startX; x < startX + 2; x++) {
             for (int y = startY; y < startY + 3; y++){
-                if (x < rows && y < columns) grid[x,y] = 0;
                 Vector2Int position = new Vector2Int(x,y);
                 area.Add(position);
                 cellControllers[new Vector2Int(x,y)] = controller;
