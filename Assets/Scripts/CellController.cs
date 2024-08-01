@@ -9,8 +9,7 @@ public class CellController : MonoBehaviour
     public int y;
     public int cellType;
 
-    public Color friendlyColor = Color.blue;
-    public Color enemyColor = Color.red;
+    Color controlledColor;
     private Color cellColor;
 
     public string controller;
@@ -55,6 +54,7 @@ public class CellController : MonoBehaviour
     public void Initialize(int x, int y, Color controlledColor, int cellType, string controller) {
         this.x = x;
         this.y = y;
+        this.controlledColor = controlledColor;
         this.cellType = cellType;
         this.controller = controller;
     }

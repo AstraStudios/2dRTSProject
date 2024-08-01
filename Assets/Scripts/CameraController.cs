@@ -27,6 +27,8 @@ public class CameraController : MonoBehaviour
         Camera.main.fieldOfView = fov;
 
         MoveCamera();
+
+        if (Input.GetKeyDown(KeyCode.P)) movePoint.transform.position = resetCam;
     }
 
     void MoveCamera() {
