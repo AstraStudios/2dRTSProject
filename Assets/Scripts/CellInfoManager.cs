@@ -10,7 +10,9 @@ public class CellInfoManager : MonoBehaviour
     
     public GameObject cellInfoPanel;
     [SerializeField] TMP_Text cellTypeText;
-    [SerializeField] TMP_Text coordinatesText;
+    [SerializeField] TMP_Text cellNameText;
+    [SerializeField] TMP_Text metalAmountText;
+    [SerializeField] TMP_Text fuelAmountText;
     [SerializeField] TMP_Text controllerText;
 
     // Start is called before the first frame update
@@ -19,7 +21,7 @@ public class CellInfoManager : MonoBehaviour
         cellInfoPanel.SetActive(false);
     }
 
-    public void ShowCellInfo(int cellType, int x, int y, string controller) {
+    public void ShowCellInfo(int cellType, int x, int y, float metalsAmount, float fuelAmount, string controller) {
         cellInfoPanel.SetActive(true);
         switch (cellType) {
             case 0:
@@ -35,7 +37,9 @@ public class CellInfoManager : MonoBehaviour
                 cellTypeText.text = "Cell Type: Salvage Spot";
                 break;
         }
-        coordinatesText.text = "Cell: (" + x + ", " + y +")";
+        cellNameText.text = "Cell: (" + x + ", " + y +")";
+        metalAmountText.text = metalsAmount + " metals";
+        fuelAmountText.text = fuelAmount + " fuel";
         controllerText.text = "Controlled by: " + controller;
     }
 

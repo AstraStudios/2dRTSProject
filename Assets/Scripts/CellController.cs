@@ -9,6 +9,8 @@ public class CellController : MonoBehaviour
     public int y;
     public int cellType;
     private int colorIndex = 1;
+    public float metalsAmount;
+    public float fuelAmount;
 
     Color controlledColor;
     private Color cellColor;
@@ -56,7 +58,8 @@ public class CellController : MonoBehaviour
     void OnMouseDown() {
         Debug.Log($"Cell {x}, {y} clicked");
         
-        if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y, controller);
+        if (cellInfoManager != null) cellInfoManager.ShowCellInfo(cellType, x, y, metalsAmount, fuelAmount, controller);
+        //ChangeOwnerToFriendly();
     }
 
     private void CurrColorMode(Color cellColor, Color currControllerColor) {
@@ -74,10 +77,14 @@ public class CellController : MonoBehaviour
         }
     }
 
-    public void Initialize(int x, int y, int cellType, string controller) {
+    public void Initialize(int x, int y, int cellType, float metals, float fuel, string controller) {
         this.x = x;
         this.y = y;
         this.cellType = cellType;
+        this.metalsAmount = metals;
+        this.fuelAmount = fuel;
         this.controller = controller;
     }
+
+    //public void ChangeOwnerToFriendly() {this.controller = "Friendly";}
 }

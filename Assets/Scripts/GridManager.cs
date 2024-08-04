@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
 
     void CreateGrid(GameObject parent) {
         gridArray = new GameObject[rows, columns];
-        //                                       Grass, Water, Mountain, Coal Depot
+        //                                       Grass, Water, Mountain, Salvage Depot
         List<int> possibleValues = new List<int> {0,1,2,3};
 
         WaveFunctionCollapse wfc = new WaveFunctionCollapse(rows, columns, possibleValues);
@@ -68,7 +68,10 @@ public class GridManager : MonoBehaviour
         cell.transform.localScale = new Vector3(cellSize, cellSize, 1);
 
         CellController cellControl = cell.GetComponent<CellController>();
-        cellControl.Initialize(x,y,cellValue, controller);
+        if (cellValue == 0) cellControl.Initialize(x, y, cellValue, Mathf.RoundToInt(Random.Range(0f,100f)), Mathf.RoundToInt(Random.Range(0f,250f)), controller);
+        if (cellValue == 1) cellControl.Initialize(x, y, cellValue, 0, Mathf.RoundToInt(Random.Range(30f, 500f)), controller);
+        if (cellValue == 2) cellControl.Initialize(x, y, cellValue, Mathf.RoundToInt(Random.Range(0f, 250f)), Mathf.RoundToInt(Random.Range(0f,15f)), controller);
+        if (cellValue == 3) cellControl.Initialize(x, y, cellValue, Mathf.RoundToInt(Random.Range(100f, 500f)), Mathf.RoundToInt(Random.Range(100f, 300f)), controller);
         cellControl.cellType = cellValue;
 
         return cell;
